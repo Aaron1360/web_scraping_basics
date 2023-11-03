@@ -1,9 +1,9 @@
-# Web Scraping and Data Processing Repository
+Web Scraping and Data Processing Repository
 
 This repository is a collection of Python scripts that demonstrate fundamental web scraping techniques and how to process the scraped data effectively. 
 
 
-## Purpose
+Purpose
 
 The primary purpose of this repository is to show examples of web scraping and file handling techniques, a valuable skill for extracting information from websites. The content here serves as a starting point for:
 
@@ -12,13 +12,13 @@ The primary purpose of this repository is to show examples of web scraping and f
 - **Data Processing**: Once you've scraped data, it's important to process and store it efficiently. This repository provides examples of working with different data formats, including PDF, CSV, Excel, and text files. You'll learn how to clean and structure the data to make it useful.
 
 
-## Getting Started
+Getting Started
 
 To get started, clone this repository and explore the examples.
 
 Please feel free to contribute or open issues if you have questions, encounter problems, or want to add new features or examples. Happy web scraping!
 
 
-## Disclaimer
+Disclaimer
 
 Always use web scraping techniques responsibly and ensure that you comply with the terms and conditions of the websites you access. Respect `robots.txt` files and follow legal and ethical guidelines when scraping data.
