@@ -3,7 +3,7 @@ The page we are going to work on is a sandbox of www.scrapethissite.com"""
 
 import requests
 from bs4 import BeautifulSoup as bs
-# import openpyxl as xl
+import openpyxl as xl
 
 def scrape_data(countries):
     """This function organizes the desired data on a list of dictionaries.
@@ -17,10 +17,10 @@ def scrape_data(countries):
     list_of_countries = []
     for country in countries:
         new_country = {}
-        new_country["name"] = country.h3.text.strip()
-        new_country["capital"]= country.find("span",class_="country-capital").text.strip()
-        new_country["population"] = country.find("span",class_="country-population").text.strip()
-        new_country["area"] = country.find("span",class_="country-area").text.strip()
+        new_country["Name"] = country.h3.text.strip()
+        new_country["Capital"]= country.find("span",class_="country-capital").text.strip()
+        new_country["Population"] = country.find("span",class_="country-population").text.strip()
+        new_country["Area"] = country.find("span",class_="country-area").text.strip()
         list_of_countries.append(new_country)
     return list_of_countries
 
@@ -46,6 +46,23 @@ def save_txt(data):
                     file.write(f"\t{key}: {value}.\n")
             file.write("\n")
     print("**Info saved successfully**")
+
+def save_excel(data):
+    """Create excel file and organizes the scraped info.
+
+    Args:
+        data (list): List of dictionaries with country information.
+    """
+    wb = xl.Workbook()
+    ws = wb.active
+    ws.title = "Countries"
+    keys = data[0].keys()
+    for col, key in enumerate(keys,1):
+        ws.cell(1,col,key)
+    for row in range(2,len(data)+2):
+        for col,info in enumerate(data[row-2].values(),1):
+            ws.cell(row,col,info)
+    wb.save("list_of_countries.xlsx")
     
 # Target
 page = "https://www.scrapethissite.com/pages/simple/"
@@ -56,6 +73,8 @@ response.encoding = "latin-1"
 soup = bs(response.content,"html.parser",from_encoding="latin-1")    
 countries = soup.find_all(name="div",class_="col-md-4 country")
 
+# Create files
 data = scrape_data(countries)
-# show_info(data)
-save_txt(data)
+# save_txt(data)
+save_excel(data)
+
