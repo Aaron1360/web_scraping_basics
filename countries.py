@@ -13,9 +13,11 @@ response = requests.get(page)
 soup = bs(response.content,"html.parser",from_encoding="latin-1")    
 countries = soup.find_all(name="div",class_="col-md-4 country")
 
-for country in countries:
-    name = country.h3.text.strip()
-    capital = country.find("span",class_="country-capital").text.strip()
-    population = country.find("span",class_="country-population").text.strip()
-    area = country.find("span",class_="country-area").text.strip()
-    print(f"Name: {name}\nCapital: {capital}\nPopulation: {population}\nArea(km^2): {area}\n") 
+with open("list_of_countries.txt","w") as file:
+    for i,country in enumerate(countries):
+        name = country.h3.text.strip()
+        capital = country.find("span",class_="country-capital").text.strip()
+        population = country.find("span",class_="country-population").text.strip()
+        area = country.find("span",class_="country-area").text.strip()
+        # print(f"Name: {name}\nCapital: {capital}\nPopulation: {population}\nArea(km^2): {area}\n") 
+        file.write(f"{i+1}.- Name: {name}\n\tCapital: {capital}\n\tPopulation: {population}\n\tArea(km^2): {area}\n\n") 
