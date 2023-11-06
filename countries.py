@@ -13,7 +13,7 @@ def scrape_data(countries):
 
     Returns:
         list: List of dictionaries where each dictionary represents a country.
-    """
+    """ 
     list_of_countries = []
     for country in countries:
         new_country = {}
@@ -40,7 +40,7 @@ def save_txt(data):
         for i,country in enumerate(data):
             file.write(f"{i+1}.- ")
             for key,value in country.items():
-                if key == "name":
+                if key == "Name":
                     file.write(f"{key}: {value}.\n")
                 else:
                     file.write(f"\t{key}: {value}.\n")
@@ -75,6 +75,6 @@ countries = soup.find_all(name="div",class_="col-md-4 country")
 
 # Create files
 data = scrape_data(countries)
-# save_txt(data)
+save_txt(data)
 save_excel(data)
 
