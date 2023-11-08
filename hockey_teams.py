@@ -50,10 +50,3 @@ for link in links:
 
 # Save data on a excel file
 hockey_df.to_excel("dataframe.xlsx",index=False)
-
-"""
-1- make first request and get all the pages excluding the first one and the forward button **DONE**
-2- scrape data of the first page and append it to the dataframe **DONE**
-3- make new request with a delay of one second to get the next page and scrape recursively 
-4- append data to dataframe on each request
-5- generate excel file"""
