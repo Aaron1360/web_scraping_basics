@@ -1,4 +1,4 @@
-"""Here we are gonna work with common website interface components by building a web scraper that can conduct searches and paginate through the results."""
+"""Here we are gonna work with common website interface components by building a web scraper that can retrieve data through different pages."""
 
 import requests
 from bs4 import BeautifulSoup as bs
