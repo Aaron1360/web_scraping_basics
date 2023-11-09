@@ -19,7 +19,7 @@ def new_request(page):
         BeautifulSoup object: contain the parsed content of the webpage.
     """
     response = requests.get(page)
-    response.encoding="latin-1"
+    # response.encoding="latin-1"
     soup = bs(response.content,"html.parser",from_encoding="latin-1")
     return soup
 
@@ -70,3 +70,4 @@ for link in links:
 
 # Save data on a excel file
 hockey_df.to_excel("df_hockey_teams.xlsx",index=False)
+print("**Data saved successfully**")

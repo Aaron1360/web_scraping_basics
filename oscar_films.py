@@ -12,7 +12,7 @@ PAGE = "https://www.scrapethissite.com/pages/ajax-javascript/"
 
 # first request
 response = requests.get(PAGE)
-response.encoding="latin-1"
+# response.encoding="latin-1"
 soup = bs(response.content,"html.parser",from_encoding="latin-1")
 col_titles = soup.find_all("th")
 titles = [title.text.strip() for title in col_titles]
@@ -31,7 +31,7 @@ for year in years:
     }
     # emulate AJAX requests
     response = requests.get(PAGE,params=payload)
-    response.encoding="latin-1"
+    # response.encoding="latin-1"
     soup = bs(response.content,"html.parser",from_encoding="latin-1")
     json_string = soup.text
     # convert parsed response to json format and store it
@@ -43,3 +43,4 @@ for year in years:
 df = pd.json_normalize(data)
 df = df.replace(NaN,"-")
 df.to_excel("films.xlsx",index=False)
+print("**Data saved successfully**")

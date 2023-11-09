@@ -45,7 +45,7 @@ def save_txt(data):
                 else:
                     file.write(f"\t{key}: {value}.\n")
             file.write("\n")
-    print("**Info saved successfully**")
+    print("**Data saved successfully**")
 
 def save_excel(data):
     """Create excel file and organizes the scraped info.
@@ -69,7 +69,7 @@ page = "https://www.scrapethissite.com/pages/simple/"
 
 # Make request and parse content
 response = requests.get(page)
-response.encoding = "latin-1"
+# response.encoding = "latin-1"
 soup = bs(response.content,"html.parser",from_encoding="latin-1")    
 countries = soup.find_all(name="div",class_="col-md-4 country")
 
