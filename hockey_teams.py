@@ -10,12 +10,26 @@ PAGE = "https://www.scrapethissite.com/pages/forms/?per_page=100"# here you can 
 MAIN_WEBSITE = "https://www.scrapethissite.com"
 
 def new_request(page):
+    """Make a request with the correct encoding and return a BeautiflSoup object.
+
+    Args:
+        page (str): Target page.
+
+    Returns:
+        BeautifulSoup object: contain the parsed content of the webpage.
+    """
     response = requests.get(page)
     response.encoding="latin-1"
     soup = bs(response.content,"html.parser",from_encoding="latin-1")
     return soup
 
 def scrape_table(current_table,dataframe):
+    """Append the content of the table to the dataframe.
+
+    Args:
+        current_table (bs4.element.Tag): This object contain all the data of the current table
+        dataframe (pandas.core.frame.DataFrame): Pandas object where the data is stored.
+    """
     rows = current_table.find_all("tr")
     for row in rows[1:]:
         row_cells = row.find_all("td")
@@ -24,6 +38,12 @@ def scrape_table(current_table,dataframe):
         dataframe.loc[length] = row_data
 
 def scrape_page(link,dataframe):
+    """Makes a request to the current link and scrape its data.
+
+    Args:
+        link (str): New page to scrape.
+        dataframe (pandas.core.frame.DataFrame): Pandas object where the data is stored.
+    """
     soup = new_request(link)
     current_table = soup.find("table",class_="table")
     scrape_table(current_table,dataframe)
@@ -49,4 +69,4 @@ for link in links:
     scrape_page(link,hockey_df)
 
 # Save data on a excel file
-hockey_df.to_excel("dataframe.xlsx",index=False)
+hockey_df.to_excel("df_hockey_teams.xlsx",index=False)
